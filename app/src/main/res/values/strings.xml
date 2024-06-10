@@ -53,4 +53,5 @@
     <string name="view_details">View Details</string>
     <string name="weather_condition">Weather Condition</string>
     <string name="average_temperature">Average Temperature</string>
+    <string name="back">Back</string>
 </resources>
