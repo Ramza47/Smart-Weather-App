@@ -1,5 +1,6 @@
 package com.example.smartweatherapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -8,9 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-
 private val Any.size: Any
-    get() {}
+    get() {
+        TODO("Not yet implemented")
+    }
 
 private fun Any.putStringArrayListExtra(s: String) {
 
@@ -18,7 +20,7 @@ private fun Any.putStringArrayListExtra(s: String) {
 
 class MainActivity : AppCompatActivity() {
 
-    private val days = arrayOf<String>(
+    private val days = arrayOf(
         "Monday",
         "Tuesday",
         "Wednesday",
@@ -27,8 +29,8 @@ class MainActivity : AppCompatActivity() {
         "Saturday",
         "Sunday"
     )
-    private val MinTemperature = arrayOf<Int>(16, 22, 40, 23, 30, 15, 10)
-    private val MaxTemperature = arrayOf<Int>(30, 35, 15, 15, 10, 19, 20)
+    private val minTemperature = arrayOf(16, 22, 40, 23, 30, 15, 10)
+    private val maxTemperature = arrayOf(30, 35, 15, 15, 10, 19, 20)
 
     private fun clearFields(dayEditText: EditText?, averagetemperatureTextView: TextView?) {
     }
@@ -37,6 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
@@ -49,7 +52,6 @@ class MainActivity : AppCompatActivity() {
 
         addButton.setOnClickListener {
             val day = dayEditText.text.toString()
-            val averagetemperature = averagetemperatureTextView.text.toString().toIntOrNull()
 
             if (day.isNotEmpty() == null) {
                 days.add(day)
@@ -60,31 +62,33 @@ class MainActivity : AppCompatActivity() {
             }
 
             var minTemperatureDisplay = ""
-            minTemperatureDisplay += "${MinTemperature[0]}\n"
-            minTemperatureDisplay += "${MinTemperature[1]}\n"
-            minTemperatureDisplay += "${MinTemperature[2]}\n"
-            minTemperatureDisplay += "${MinTemperature[3]}\n"
-            minTemperatureDisplay += "${MinTemperature[4]}\n"
-            minTemperatureDisplay += "${MinTemperature[5]}\n"
-            minTemperatureDisplay += "${MinTemperature[6]}\n"
-            minTemperatureDisplay += "${MinTemperature[7]}\n"
+            minTemperatureDisplay += "${minTemperature[0]}\n"
+            minTemperatureDisplay += "${minTemperature[1]}\n"
+            minTemperatureDisplay += "${minTemperature[2]}\n"
+            minTemperatureDisplay += "${minTemperature[3]}\n"
+            minTemperatureDisplay += "${minTemperature[4]}\n"
+            minTemperatureDisplay += "${minTemperature[5]}\n"
+            minTemperatureDisplay += "${minTemperature[6]}\n"
+            minTemperatureDisplay += "${minTemperature[7]}\n"
 
 
             var maxTemperatureDisplay = ""
-            maxTemperatureDisplay += "${MaxTemperature[0]}\n"
-            maxTemperatureDisplay += "${MaxTemperature[1]}\n"
-            maxTemperatureDisplay += "${MaxTemperature[2]}\n"
-            maxTemperatureDisplay += "${MaxTemperature[3]}\n"
-            maxTemperatureDisplay += "${MaxTemperature[4]}\n"
-            maxTemperatureDisplay += "${MaxTemperature[5]}\n"
-            maxTemperatureDisplay += "${MaxTemperature[6]}\n"
-            maxTemperatureDisplay += "${MaxTemperature[7]}\n"
+            maxTemperatureDisplay += "${maxTemperature[0]}\n"
+            maxTemperatureDisplay += "${maxTemperature[1]}\n"
+            maxTemperatureDisplay += "${maxTemperature[2]}\n"
+            maxTemperatureDisplay += "${maxTemperature[3]}\n"
+            maxTemperatureDisplay += "${maxTemperature[4]}\n"
+            maxTemperatureDisplay += "${maxTemperature[5]}\n"
+            maxTemperatureDisplay += "${maxTemperature[6]}\n"
+            maxTemperatureDisplay += "${maxTemperature[7]}\n"
 
-            val averagetemperature =
-                arrayOf<Int>(16, 22, 40, 23, 30, 15, 10, 30, 35, 15, 15, 10, 19, 20)
-            val averagetemperature = if (day.isNotEmpty()) averagetemperature / day.size
+            var averagetemperature =
+                arrayOf(16, 22, 40, 23, 30, 15, 10, 30, 35, 15, 15, 10, 19, 20)
+            averagetemperature = if (day.isNotEmpty()) averagetemperature/day.size
             else
-                0
+                arrayOf(0)
+            averagetemperatureTextView.text = "Average Temperature : $averagetemperature minutes/day"
+
 
             // The code will clear all data saved in the arraylists!
             clearButton.setOnClickListener {
@@ -97,11 +101,19 @@ class MainActivity : AppCompatActivity() {
 
             viewDetailsButton.setOnClickListener {
                 val intent = Intent(this, DetailedViewActivity::class.java)
-                intent.putStringArrayListExtra("day",)
-                intent.putStringArrayListExtra("averageTemperature",)
-                intent.putStringArrayListExtra("WeatherCondition",)
+                intent.putStringArrayListExtra("day")
+                intent.putStringArrayListExtra("averageTemperature")
+                intent.putStringArrayListExtra("WeatherCondition")
                 startActivity(intent)
             }
         }
     }
+}
+
+private operator fun Any.div(size: Any): Array<Int> {
+    return TODO("Provide the return value")
+}
+
+private fun <T> Array<T>.add(day: T) {
+
 }
